@@ -20,7 +20,7 @@ Full detail: [`docs/devops/README.md`](docs/devops/README.md).
 | Key                                   | Value                                                                                     |
 | ------------------------------------- | ----------------------------------------------------------------------------------------- |
 | `forgeflow_domain`                  | **required** — your API subdomain, no scheme (currently `CHANGE_ME.example.com`) |
-| `forgeflow_cors_origins`            | your Vercel URL, e.g.`https://forgeflow.vercel.app`                                     |
+| `forgeflow_cors_origins`            | your Vercel URL, e.g.`https://forgeflow-ecru.vercel.app`                                |
 | `forgeflow_image`                   | `ghcr.io/<owner>/forgeflow-api:latest`                                                  |
 | `monitoring_grafana_admin_password` | anything but the default                                                                  |
 | `forgeflow_api_port`                | `8000` — change only if another service holds it                                       |

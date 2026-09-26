@@ -35,8 +35,8 @@ pipx ensurepath && exec $SHELL
 # Work from the WSL mount of the repo, NOT /mnt/c, if you can avoid it:
 # ansible refuses to read an ansible.cfg from a world-writable directory, and
 # everything under /mnt/c is world-writable by default.
-cd ~ && git clone git@github.com:Faheem219/ForgeFlow.git
-cd ForgeFlow/infra/ansible
+cd ~ && git clone git@github.com:Islinger19/ForgeFlow-IBM-BOB.git
+cd ForgeFlow-IBM-BOB/infra/ansible
 ansible-galaxy collection install -r requirements.yml
 ```
 

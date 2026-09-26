@@ -28,7 +28,7 @@ data:
   # CORS: the Vercel frontend origin. Replace with your real deployment URL — "*" is NOT usable
   # here because the app sets allow_credentials whenever origins != ["*"] (see api/app.py), and a
   # wildcard with credentials is rejected by every browser.
-  CORS_ORIGINS: "https://forgeflow.vercel.app"
+  CORS_ORIGINS: "https://forgeflow-ecru.vercel.app"
 
   # Sandbox-backed stages are inert in this cluster (see the note in api-deployment). Keeping the
   # image name correct anyway means nothing silently points at a non-existent tag if the socket is

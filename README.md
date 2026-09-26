@@ -1,15 +1,31 @@
 # ForgeFlow
 
+> **IBM Bob 2.0 Hackathon submission** (lablab.ai, 25–27 Sep 2026)
+> Challenge area: **testing, debugging, and release & deployment workflows**.
+>
+> - **Live app:** https://forgeflow-ecru.vercel.app
+> - **Video demo:** https://youtu.be/cjVYj87INMo
+> - **Slides:** [`presentation/ForgeFlow_IBM_Bob_Hackathon.html`](./presentation/ForgeFlow_IBM_Bob_Hackathon.html) ([PDF](./presentation/ForgeFlow_IBM_Bob_Hackathon.pdf))
+> - **Submission text:** [`presentation/IBM_Bob_Hackathon_Submission.md`](./presentation/IBM_Bob_Hackathon_Submission.md)
+> - **IBM Bob evidence:** [`bob_sessions/`](./bob_sessions/) (exported task histories and consumption screenshots)
+
 AI-native, human-in-the-loop **PWA** that carries a web-app idea — from screenshots or a
 structured spec — through **requirements → design → build → test + self-healing repair →
 deploy → live validation**, letting you refine, revisit, or skip **any** stage.
 
-- **What to build:** [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md) (source of truth).
-- **How we work:** [`CLAUDE.md`](./CLAUDE.md) (operating manual).
-- **Per-phase specs:** [`plans/`](./plans/) — start at [`plans/README.md`](./plans/README.md).
+## Working on ForgeFlow with IBM Bob
 
-> Status: **Phase 01** (repo, tooling & local dev) — the monorepo skeleton, quality tooling,
-> and one-command local dev.
+This repository is set up for [IBM Bob](https://www.ibm.com/products/bob) 2.0:
+
+- [`AGENTS.md`](./AGENTS.md) — project context Bob loads at the start of every task: layout,
+  commands, conventions and the no-go areas.
+- [`.bob/rules/`](./.bob/rules/) — custom rules for the fixed generated-app stack and for the
+  bounded repair loop.
+- [`bob_sessions/`](./bob_sessions/) — each team member's exported Bob task histories and
+  consumption-summary screenshots.
+
+Open the repository folder in IBM Bob IDE, start in **Ask** mode to explore, **Plan** mode to
+design a change, and **Code**/**Agent** mode to implement it.
 
 ## Repository layout
 
@@ -20,7 +36,8 @@ templates/   app-skeleton/ — fixed-stack generated-app template (filled in pha
 sandbox/     per-project sandbox image (built in phase 10)
 infra/       docker-compose.yml + Caddy reverse proxy
 eval/        benchmark specs (phase 43)
-plans/       per-phase execution specs
+presentation/ hackathon slides and submission text
+bob_sessions/ IBM Bob task-session exports
 ```
 
 ## Prerequisites
@@ -82,4 +99,4 @@ documented in [`.env.example`](./.env.example). Never commit `.env`.
 
 ## License
 
-Proprietary / coursework project (PBL). Not for redistribution.
+[MIT](./LICENSE) © 2026 Sanidhya Awasthi and the ForgeFlow team.

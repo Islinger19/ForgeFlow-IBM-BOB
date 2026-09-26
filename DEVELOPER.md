@@ -1,6 +1,6 @@
 # ForgeFlow — Developer Guide
 
-How to run ForgeFlow locally with **every stage functional**. What is being built: [`IMPLEMENTATION_PLAN.md`](./IMPLEMENTATION_PLAN.md). Every config variable: [`.env.example`](./.env.example).
+How to run ForgeFlow locally with **every stage functional**. Project overview: [`README.md`](./README.md); agent context: [`AGENTS.md`](./AGENTS.md). Every config variable: [`.env.example`](./.env.example).
 
 ---
 

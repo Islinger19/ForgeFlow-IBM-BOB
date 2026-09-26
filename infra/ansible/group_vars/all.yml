@@ -18,7 +18,7 @@ forgeflow_group: forgeflow
 forgeflow_user_shell: /usr/sbin/nologin
 
 forgeflow_root: /opt/forgeflow
-forgeflow_repo_url: "https://github.com/Faheem219/ForgeFlow.git"
+forgeflow_repo_url: "https://github.com/Islinger19/ForgeFlow-IBM-BOB.git"
 
 # ----------------------------------------------------------------------------- public surface
 # YOUR subdomain — the one nginx already terminates TLS for. Used by the nginx site template and

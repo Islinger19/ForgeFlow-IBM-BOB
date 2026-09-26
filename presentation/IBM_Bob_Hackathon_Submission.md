@@ -3,6 +3,17 @@
 Paste each block into the matching lablab.ai field. Anything in [square brackets] must be replaced with
 real values from your bob_sessions/ exports before submitting, or the sentence deleted.
 
+## Links
+
+| Field | Value |
+|-------|-------|
+| Public code repository | https://github.com/Islinger19/ForgeFlow-IBM-BOB |
+| Application URL | https://forgeflow-ecru.vercel.app |
+| Demo application platform | Web (PWA), deployed on Vercel |
+| Video demonstration | https://youtu.be/cjVYj87INMo |
+| Slide presentation | `presentation/ForgeFlow_IBM_Bob_Hackathon.pdf` |
+| IBM Bob session screenshots | `bob_sessions/<member>/` |
+
 ## Submission Title
 
 ForgeFlow: Self-Healing Test, Repair & Deploy
@@ -22,7 +33,7 @@ ForgeFlow is a human-in-the-loop Progressive Web App that carries a web-app idea
 - Tests come from your acceptance criteria. Each criterion's ID travels into the generated test, its result, the repair context and the live-validation report.
 - Failures go to a bounded, diff-aware repair loop. The agent sees only the failing tests, the sources they exercise, the git diff since the last green run and the criterion text. The loop stops at the first of four guards (regression, no progress, iteration cap, budget cap) and escalates with a plain-language summary of what it tried.
 - Deployment is infrastructure-aware: the SPA and Node API go to Vercel, data to MongoDB Atlas, and the same suite re-runs against the live URL. Live failures re-enter the same bounded loop.
-- Continue in IBM Bob: when the loop escalates, ForgeFlow exports the workspace with AGENTS.md, Bob rules and a BOB_HANDOFF.md, so a developer continues in IBM Bob IDE's Plan mode with full context.
+- Built for IBM Bob: the repo ships AGENTS.md and .bob/rules/, and our Continue in IBM Bob feature (in progress) exports an escalated workspace with a BOB_HANDOFF.md for IBM Bob IDE's Plan mode.
 
 WHO IT'S FOR AND HOW THEY USE IT
 Student and indie builders, agencies prototyping for clients, and teams adopting AI coding tools who need proof before they ship. In the browser, they describe the app or drop in screenshots, edit requirements, refine the design in one sentence, watch code and a live preview update in real time, follow each repair iteration, and deploy with one action. Any stage can be entered, skipped or revisited; only deploy needs a build, and validation a deploy.
@@ -37,9 +48,9 @@ Untrusted code runs only in per-project Docker sandboxes with no host network. M
 ## IBM Bob Usage Statement
 
 <!-- BOB-START -->
-ForgeFlow's core pipeline, sandboxes and repair loop were built by our team before the event; the git history starts in July 2026. We brought it to the hackathon because it is the kind of codebase Bob 2.0 is designed for: 150 commits across a Python control plane, a React PWA, Docker sandboxes and deploy adapters. Everything below was done in IBM Bob IDE during the hackathon. Each session's consumption-summary screenshot and exported task history is in bob_sessions/ in our repository.
+ForgeFlow's core pipeline, sandboxes and repair loop were built by our team before the event. We brought it to the hackathon because it is the kind of codebase Bob 2.0 is designed for: about 800 files across a Python control plane, a React PWA, Docker sandboxes and deploy adapters. Everything below was done in IBM Bob IDE during the hackathon. Each session's consumption-summary screenshot and exported task history is in bob_sessions/ in our repository.
 
-1. Onboarding with full repository context. We ran /init, which generated AGENTS.md and the .bob/ mode files, then used Ask mode to trace how a failing test becomes a repair attempt, from the test runner to the loop controller. Bob spawned [N] explore subagents in parallel to map the testing, agents and orchestrator packages, and returned the path with file references.
+1. Onboarding with full repository context. We ran /init to give Bob project context (our AGENTS.md and .bob/rules/ are in the repository), then used Ask mode to trace how a failing test becomes a repair attempt, from the test runner to the loop controller. Bob spawned [N] explore subagents in parallel to map the testing, agents and orchestrator packages, and returned the path with file references.
 
 2. Code review. We ran /review on the repair-loop controller, the sandbox manager and the deploy adapters. The Bob Findings panel reported [N] issues; we confirmed [N] and fixed them with Bob in Code mode, with a test for each fix.
 

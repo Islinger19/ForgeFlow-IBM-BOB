@@ -434,15 +434,15 @@
 
 <!-- 8 · Where IBM Bob fits -->
 <section class="slide blue" aria-label="Where IBM Bob fits">
-  <p class="stamp">Built with IBM Bob during the hackathon</p>
+  <p class="stamp">IBM Bob 2.0 Hackathon build</p>
   <div><p class="eyebrow">Where IBM Bob fits</p><h2>ForgeFlow automates the bounded part. IBM Bob takes over where it stops.</h2></div>
   <div class="bob-cols">
     <div>
       <h3>IBM Bob as our development partner</h3>
-      <p>ForgeFlow is a real, 150-commit codebase: a FastAPI control plane, a React PWA, Docker sandboxes and deploy adapters. During the hackathon we worked on it in IBM Bob IDE, using Bob 2.0's full-repository context to onboard, review and extend it.</p>
+      <p>ForgeFlow is a real, multi-service codebase of about 800 files: a FastAPI control plane, a React PWA, Docker sandboxes and deploy adapters. During the hackathon we worked on it in IBM Bob IDE, using Bob 2.0's full-repository context to onboard, review and extend it. The repo ships <code>AGENTS.md</code> and <code>.bob/rules/</code> so Bob loads our conventions in every session.</p>
     </div>
     <div>
-      <h3>Continue in IBM Bob</h3>
+      <h3>Continue in IBM Bob <span style="font-family:var(--mono);font-size:12px;font-weight:400;border:1px solid var(--blue-10);padding:2px 6px;margin-left:6px;vertical-align:middle">in progress</span></h3>
       <p>When the repair loop escalates, ForgeFlow exports the workspace ready for Bob:</p>
       <ul class="handoff">
         <li><code>AGENTS.md</code><span>stack, commands and conventions</span></li>
@@ -460,7 +460,7 @@
   <table class="sessions">
     <thead><tr><th>#</th><th>Task</th><th>IBM Bob 2.0 feature</th><th>Result in the repo</th><th>Bobcoins</th></tr></thead>
     <tbody>
-      <tr><td>01</td><td>Onboard Bob to a 150-commit, multi-service repo</td><td class="feat">/init, Ask mode, parallel explore subagents</td><td><span class="tok">AGENTS.md</span> and <span class="tok">.bob/</span> mode context</td><td><span class="fill">[ ]</span></td></tr>
+      <tr><td>01</td><td>Onboard Bob to an 800-file, multi-service repo</td><td class="feat">/init, Ask mode, parallel explore subagents</td><td><span class="tok">AGENTS.md</span> and <span class="tok">.bob/</span> mode context</td><td><span class="fill">[ ]</span></td></tr>
       <tr><td>02</td><td>Review the repair loop, sandbox and deploy code</td><td class="feat">/review and the Bob Findings panel</td><td>Fix commits for confirmed findings</td><td><span class="fill">[ ]</span></td></tr>
       <tr><td>03</td><td>Plan the IBM Bob handoff from our own specs</td><td class="feat">Plan mode reading the implementation plan and phase specs</td><td><span class="tok">plans/phase-66-bob-handoff.md</span></td><td><span class="fill">[ ]</span></td></tr>
       <tr><td>04</td><td>Build the handoff end to end</td><td class="feat">Agent mode with parallel tool calls</td><td>Export endpoint and the Continue in IBM Bob button</td><td><span class="fill">[ ]</span></td></tr>
@@ -561,11 +561,12 @@
       <li>Watch the repair loop fix Clear completed</li>
       <li>Deploy the SPA and API to Vercel, data to MongoDB Atlas</li>
       <li>Re-run the suite against the live URL</li>
-      <li class="bob">Escalate a hard case and continue it in IBM Bob</li>
+      <li class="bob">Next: escalate a hard case and continue it in IBM Bob</li>
     </ol>
     <div class="links">
-      <div><p class="k">Live app</p><p class="v"><span class="fill">[add live URL]</span></p></div>
-      <div><p class="k">Code</p><p class="v"><a href="https://github.com/Faheem219/ForgeFlow" target="_blank" rel="noopener">github.com/Faheem219/ForgeFlow</a></p></div>
+      <div><p class="k">Live app</p><p class="v"><a href="https://forgeflow-ecru.vercel.app" target="_blank" rel="noopener">forgeflow-ecru.vercel.app</a></p></div>
+      <div><p class="k">Video demo</p><p class="v"><a href="https://youtu.be/cjVYj87INMo" target="_blank" rel="noopener">youtu.be/cjVYj87INMo</a></p></div>
+      <div><p class="k">Code</p><p class="v"><a href="https://github.com/Islinger19/ForgeFlow-IBM-BOB" target="_blank" rel="noopener">github.com/Islinger19/ForgeFlow-IBM-BOB</a></p></div>
       <div><p class="k">IBM Bob evidence</p><p class="v"><code>bob_sessions/</code> in the repository</p></div>
       <div><p class="k">Team</p><p class="v">Faheemuddin Sayyed, Sanidhya Awasthi, Raghav Sonchhatra</p></div>
     </div>
