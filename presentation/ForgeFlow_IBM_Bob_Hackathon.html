@@ -462,7 +462,7 @@
     <tbody>
       <tr><td>01</td><td>Onboard Bob to an 800-file, multi-service repo</td><td class="feat">/init, Ask mode, parallel explore subagents</td><td><span class="tok">AGENTS.md</span> and <span class="tok">.bob/</span> mode context</td><td><span class="fill">[ ]</span></td></tr>
       <tr><td>02</td><td>Review the repair loop, sandbox and deploy code</td><td class="feat">/review and the Bob Findings panel</td><td>Fix commits for confirmed findings</td><td><span class="fill">[ ]</span></td></tr>
-      <tr><td>03</td><td>Plan the IBM Bob handoff from our own specs</td><td class="feat">Plan mode reading the implementation plan and phase specs</td><td><span class="tok">plans/phase-66-bob-handoff.md</span></td><td><span class="fill">[ ]</span></td></tr>
+      <tr><td>03</td><td>Plan the IBM Bob handoff from our own specs</td><td class="feat">Plan mode reading AGENTS.md, .bob/rules and our docs</td><td><span class="tok">plans/bob-handoff.md</span></td><td><span class="fill">[ ]</span></td></tr>
       <tr><td>04</td><td>Build the handoff end to end</td><td class="feat">Agent mode with parallel tool calls</td><td>Export endpoint and the Continue in IBM Bob button</td><td><span class="fill">[ ]</span></td></tr>
       <tr><td>05</td><td>Test the handoff</td><td class="feat">Agent mode with a general subagent</td><td>pytest and Vitest cases</td><td><span class="fill">[ ]</span></td></tr>
     </tbody>
@@ -490,13 +490,13 @@
 <section class="slide" aria-label="Built and measured">
   <div><p class="eyebrow">Built and measured</p><h2>Working today, with the evidence in the repository</h2></div>
   <div class="nums">
-    <div class="num"><p class="big">2,148</p><p>automated tests passing across the control plane, PWA, sandbox and deploy code (19 Sep 2026)</p></div>
-    <div class="num"><p class="big">65</p><p>build phases shipped, each with written acceptance criteria and passing tests</p></div>
-    <div class="num"><p class="big">6</p><p>CI jobs gate every change: backend, frontend, sandbox, app skeleton, security and config</p></div>
+    <div class="num"><p class="big">2,000+</p><p>automated tests across the control plane, PWA, sandbox and deploy code</p></div>
+    <div class="num"><p class="big">65</p><p>incremental parts the build was delivered in, each with its own acceptance criteria and passing tests</p></div>
+    <div class="num"><p class="big">6</p><p>quality gates before every commit: backend lint, frontend lint, backend tests, frontend tests, app-skeleton verify and config check</p></div>
     <div class="num"><p class="big">10</p><p>benchmark apps. Each run records first-pass and post-repair pass rate, iterations, regressions and cost.</p></div>
   </div>
   <div class="spacer"></div>
-  <p class="band">Every phase clears the same gate: ruff, black and mypy on the backend; ESLint, Prettier and Vitest on the PWA; pytest against a disposable MongoDB.</p>
+  <p class="band">Every change clears the same gate: ruff, black and mypy on the backend; ESLint, Prettier and Vitest on the PWA; pytest against a disposable MongoDB.</p>
 </section>
 
 <!-- 12 · Architecture -->

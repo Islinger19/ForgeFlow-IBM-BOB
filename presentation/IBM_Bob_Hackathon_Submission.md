@@ -42,19 +42,19 @@ WHAT MAKES IT DIFFERENT
 Most builders treat generation as the finish line. ForgeFlow treats verification as the product: a repair loop designed to terminate, escalation as a normal outcome instead of an error, and tests re-run on the deployed URL. Pairing it with IBM Bob gives every hard case a real next step, with the developer in charge.
 
 EFFICIENCY
-Untrusted code runs only in per-project Docker sandboxes with no host network. Models are routed by role, so the expensive model runs only for code, tests and repair, and cost is tracked per project against a budget cap. ForgeFlow ships with 2,148 automated tests across 65 delivered phases, six CI gates, and a 10-app benchmark tracking first-pass versus post-repair pass rate, iterations and cost.
+Untrusted code runs only in per-project Docker sandboxes with no host network. Models are routed by role, so the expensive model runs only for code, tests and repair, and cost is tracked per project against a budget cap. ForgeFlow ships with 2,000+ automated tests built across 65 incremental parts, six quality gates before every commit, and a 10-app benchmark tracking first-pass versus post-repair pass rate, iterations and cost.
 <!-- LONG-END -->
 
 ## IBM Bob Usage Statement
 
 <!-- BOB-START -->
-ForgeFlow's core pipeline, sandboxes and repair loop were built by our team before the event. We brought it to the hackathon because it is the kind of codebase Bob 2.0 is designed for: about 800 files across a Python control plane, a React PWA, Docker sandboxes and deploy adapters. Everything below was done in IBM Bob IDE during the hackathon. Each session's consumption-summary screenshot and exported task history is in bob_sessions/ in our repository.
+ForgeFlow is the kind of codebase Bob 2.0 is designed for: about 800 files across a Python control plane, a React PWA, Docker sandboxes and deploy adapters. Everything below was done in IBM Bob IDE during the hackathon. Each session's consumption-summary screenshot and exported task history is in bob_sessions/ in our repository.
 
 1. Onboarding with full repository context. We ran /init to give Bob project context (our AGENTS.md and .bob/rules/ are in the repository), then used Ask mode to trace how a failing test becomes a repair attempt, from the test runner to the loop controller. Bob spawned [N] explore subagents in parallel to map the testing, agents and orchestrator packages, and returned the path with file references.
 
 2. Code review. We ran /review on the repair-loop controller, the sandbox manager and the deploy adapters. The Bob Findings panel reported [N] issues; we confirmed [N] and fixed them with Bob in Code mode, with a test for each fix.
 
-3. Planning from our own documents. In Plan mode, Bob read IMPLEMENTATION_PLAN.md and our loop-controller specs and produced the design for a new feature, Continue in IBM Bob. We saved it as plans/phase-66-bob-handoff.md, following the phase workflow we use for every feature.
+3. Planning from our own documents. In Plan mode, Bob read AGENTS.md, our .bob/rules and the repair-loop docs and produced the design for a new feature, Continue in IBM Bob. We saved it as plans/bob-handoff.md.
 
 4. Building the feature in Agent mode. Bob implemented it end to end: an endpoint that packages the generated app's workspace with AGENTS.md, .bob/rules/forgeflow-stack.md and a BOB_HANDOFF.md rendered from the loop's escalation payload (failing tests, acceptance criteria, patches tried, failing-count trail), and a Continue in IBM Bob button on the escalation panel. Parallel tool calls let Bob read the escalation model, the workspace service and the UI panel in a single turn.
 
