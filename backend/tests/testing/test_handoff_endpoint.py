@@ -17,8 +17,8 @@ from beanie import PydanticObjectId
 from httpx import ASGITransport, AsyncClient
 
 from app.api.app import create_app
-from app.db.models import Artifact, TestRun
-from app.db.models.enums import ArtifactType, Stage, TestEnv
+from app.db.models import Artifact
+from app.db.models.enums import ArtifactType, Stage
 from app.orchestrator.stages.repair import LOOP_ESCALATED, REPAIR_REPORT_KIND
 
 pytestmark = pytest.mark.usefixtures("mongo_db")
@@ -159,9 +159,7 @@ class TestExportBobHandoffNotFound:
     async def test_project_with_no_repair_run_is_404(self, client: AsyncClient) -> None:
         token = await _register(client, "norepair@example.com")
         pid = await _project(client, token)
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 404
 
     async def test_repair_run_not_escalated_is_404(self, client: AsyncClient) -> None:
@@ -169,9 +167,7 @@ class TestExportBobHandoffNotFound:
         token = await _register(client, "notescalated@example.com")
         pid = await _project(client, token)
         await _seed_repair_artifact(pid, escalated=False)
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 404
 
 
@@ -181,24 +177,22 @@ class TestExportBobHandoffZip:
         pid = await _project(client, token, name="TodoApp")
         await _seed_repair_artifact(pid)
 
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 200
         zf = _open_zip(resp.content)
         names = set(zf.namelist())
-        assert names == {"AGENTS.md", ".bob/rules/forgeflow-stack.md", "BOB_HANDOFF.md"}, (
-            f"Unexpected zip contents: {names}"
-        )
+        assert names == {
+            "AGENTS.md",
+            ".bob/rules/forgeflow-stack.md",
+            "BOB_HANDOFF.md",
+        }, f"Unexpected zip contents: {names}"
 
     async def test_agents_md_contains_project_name(self, client: AsyncClient) -> None:
         token = await _register(client, "agentsmd@example.com")
         pid = await _project(client, token, name="MyTodoApp")
         await _seed_repair_artifact(pid)
 
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 200
         zf = _open_zip(resp.content)
         agents = zf.read("AGENTS.md").decode("utf-8")
@@ -209,9 +203,7 @@ class TestExportBobHandoffZip:
         pid = await _project(client, token)
         await _seed_repair_artifact(pid)
 
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 200
         zf = _open_zip(resp.content)
         stack = zf.read(".bob/rules/forgeflow-stack.md").decode("utf-8")
@@ -223,9 +215,7 @@ class TestExportBobHandoffZip:
         pid = await _project(client, token)
         await _seed_repair_artifact(pid)
 
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 200
         zf = _open_zip(resp.content)
         handoff = zf.read("BOB_HANDOFF.md").decode("utf-8")
@@ -237,9 +227,7 @@ class TestExportBobHandoffZip:
         pid = await _project(client, token)
         await _seed_repair_artifact(pid)
 
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 200
         assert "zip" in resp.headers.get("content-type", "")
 
@@ -248,9 +236,7 @@ class TestExportBobHandoffZip:
         pid = await _project(client, token)
         await _seed_repair_artifact(pid)
 
-        resp = await client.get(
-            f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token)
-        )
+        resp = await client.get(f"/projects/{pid}/repair/export-bob-handoff", headers=_auth(token))
         assert resp.status_code == 200
         cd = resp.headers.get("content-disposition", "")
         assert "bob-handoff-" in cd

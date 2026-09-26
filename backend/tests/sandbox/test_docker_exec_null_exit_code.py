@@ -6,12 +6,9 @@ Mapping that to 0 causes every result.ok check to report success on a dead conta
 
 from __future__ import annotations
 
-from typing import Any
 from unittest.mock import MagicMock
 
-import pytest
-
-from app.sandbox.runtime import EXIT_UNKNOWN, DockerRuntime, ExecResult
+from app.sandbox.runtime import EXIT_UNKNOWN, DockerRuntime
 
 
 def _make_runtime(exit_code: int | None, output: tuple[bytes, bytes] | None) -> DockerRuntime:

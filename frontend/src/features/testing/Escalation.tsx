@@ -41,7 +41,11 @@ export function Escalation({
   const exportHandoff = useMutation({
     mutationFn: () => exportBobHandoff(projectId),
     onError: () => {
-      toast({ title: 'Export failed', description: 'Could not prepare the handoff zip', variant: 'error' });
+      toast({
+        title: 'Export failed',
+        description: 'Could not prepare the handoff zip',
+        variant: 'error',
+      });
     },
   });
 
@@ -120,7 +124,7 @@ export function Escalation({
       <div className="flex items-center">
         <Button
           type="button"
-          variant="outline"
+          variant="secondary"
           size="sm"
           data-testid="export-bob-handoff"
           disabled={exportHandoff.isPending}

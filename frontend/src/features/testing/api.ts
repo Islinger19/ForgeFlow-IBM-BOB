@@ -78,10 +78,9 @@ export function getAttemptDiff(projectId: string, attemptId: string): Promise<{ 
  */
 export async function exportBobHandoff(projectId: string): Promise<void> {
   const { token } = useAuthStore.getState();
-  const res = await fetch(
-    `${apiBaseUrl}/projects/${projectId}/repair/export-bob-handoff`,
-    { headers: token ? { Authorization: `Bearer ${token}` } : {} },
-  );
+  const res = await fetch(`${apiBaseUrl}/projects/${projectId}/repair/export-bob-handoff`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
   if (!res.ok) {
     throw new ApiError(res.status, 'Export failed');
   }

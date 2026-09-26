@@ -16,13 +16,11 @@ Deadline: **27 Sep 2026, 11:00 AM ET (8:30 PM IST)** on lablab.ai.
 - Live app: https://forgeflow-ecru.vercel.app
 - Video: https://youtu.be/cjVYj87INMo (swap for the final link if it changes)
 
-## Still to do before submitting
+## Status
 
-- [ ] Run the IBM Bob sessions listed in `bob_sessions/README.md` (split them across teammates).
-- [ ] After each session, export the task history and screenshot the consumption summary into
-      `bob_sessions/<member>/`, then commit.
-- [ ] Replace every `[N]` in the Bob statement and the `[ ]` Bobcoin cells on slide 9 with real
-      numbers from those exports, then regenerate the PDF (open the HTML in Chrome → Print → Save as PDF).
-- [ ] If Continue in IBM Bob gets built in Bob before the deadline, drop the "in progress" labels on
-      slide 8 and in the long description, and the "Next:" on slide 13.
-- [ ] Upload the IBM Bob session screenshots from each team member in the form.
+- [x] IBM Bob session run, exported and committed (`bob_sessions/sanidhya/`, 27.86 Bobcoins)
+- [x] Continue in IBM Bob built and tested; deck and submission text updated with real numbers
+- [ ] Make the GitHub repository public
+- [ ] Upload `bob_sessions/sanidhya/forgeflow-bob-session.png.png` in the IBM Bob screenshots field
+- [ ] Cover image: a screenshot of slide 1 of the deck works
+- [ ] Teammates who used Bob add their own export + screenshot under `bob_sessions/<name>/`

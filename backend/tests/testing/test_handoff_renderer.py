@@ -8,7 +8,6 @@ from __future__ import annotations
 
 from app.testing.handoff import render_agents_md, render_bob_handoff_md, render_stack_md
 
-
 # ------------------------------------------------------------------ render_agents_md
 
 
@@ -107,9 +106,27 @@ def _full_escalation() -> dict:
             },
         ],
         "diffs_tried": [
-            {"id": "a1", "iteration": 1, "target_files": [src], "outcome": "no_progress", "reverted": False},
-            {"id": "a2", "iteration": 2, "target_files": [src], "outcome": "no_progress", "reverted": False},
-            {"id": "a3", "iteration": 3, "target_files": [src], "outcome": "regressed", "reverted": True},
+            {
+                "id": "a1",
+                "iteration": 1,
+                "target_files": [src],
+                "outcome": "no_progress",
+                "reverted": False,
+            },
+            {
+                "id": "a2",
+                "iteration": 2,
+                "target_files": [src],
+                "outcome": "no_progress",
+                "reverted": False,
+            },
+            {
+                "id": "a3",
+                "iteration": 3,
+                "target_files": [src],
+                "outcome": "regressed",
+                "reverted": True,
+            },
         ],
         "metrics": {
             "initial_failing": 2,

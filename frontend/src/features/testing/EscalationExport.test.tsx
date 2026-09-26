@@ -29,7 +29,13 @@ const ESCALATION: RepairEscalation = {
     },
   ],
   diffs_tried: [
-    { id: 'a1', iteration: 1, target_files: ['src/todos.controller.ts'], diff_ref: 'fs:d1', outcome: 'no_progress' },
+    {
+      id: 'a1',
+      iteration: 1,
+      target_files: ['src/todos.controller.ts'],
+      diff_ref: 'fs:d1',
+      outcome: 'no_progress',
+    },
   ],
   metrics: {
     initial_failing: 1,
@@ -74,7 +80,10 @@ afterEach(() => vi.unstubAllGlobals());
 
 describe('Escalation — export button', () => {
   it('shows the export button when escalation is provided', () => {
-    vi.stubGlobal('fetch', vi.fn<typeof fetch>(() => Promise.resolve(json({}))));
+    vi.stubGlobal(
+      'fetch',
+      vi.fn<typeof fetch>(() => Promise.resolve(json({}))),
+    );
     renderEscalation();
     expect(screen.getByTestId('export-bob-handoff')).toBeInTheDocument();
     expect(screen.getByTestId('export-bob-handoff')).toHaveTextContent('Continue in IBM Bob');
@@ -125,10 +134,13 @@ describe('Escalation — export button', () => {
       vi.fn<typeof fetch>((input) => {
         if (String(input).includes('export-bob-handoff')) {
           return Promise.resolve(
-            new Response(JSON.stringify({ error: { type: 'not_found', message: 'Not escalated' } }), {
-              status: 404,
-              headers: { 'Content-Type': 'application/json' },
-            }),
+            new Response(
+              JSON.stringify({ error: { type: 'not_found', message: 'Not escalated' } }),
+              {
+                status: 404,
+                headers: { 'Content-Type': 'application/json' },
+              },
+            ),
           );
         }
         return Promise.resolve(json({}));

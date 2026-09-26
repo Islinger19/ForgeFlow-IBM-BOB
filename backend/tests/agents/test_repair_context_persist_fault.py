@@ -14,7 +14,6 @@ from pathlib import Path
 import pytest
 
 from app.agents.repair_context import RepairContext, RepairContextAnalyzer
-from app.core.config import reset_config
 from app.db.models import TestRun
 from tests.agents.repair_fakes import (
     FakeContextWorkspace,
@@ -30,7 +29,7 @@ pytestmark = pytest.mark.usefixtures("mongo_db")
 class _PatchedTestRun(TestRun):
     """A TestRun that raises on save() to simulate a transient DB error."""
 
-    async def save(self, *args: object, **kwargs: object) -> "TestRun":  # type: ignore[override]
+    async def save(self, *args: object, **kwargs: object) -> TestRun:  # type: ignore[override]
         raise RuntimeError("simulated DB failure")
 
 
@@ -88,9 +87,9 @@ class TestPersistSaveFaultTolerance:
     ) -> None:
         """The caller can see that persistence failed via context.notes."""
         context = await _run_persist_with_failing_save(tmp_path, monkeypatch)
-        assert any("persist" in note.lower() for note in context.notes), (
-            f"Expected a persistence-failure note, got: {context.notes}"
-        )
+        assert any(
+            "persist" in note.lower() for note in context.notes
+        ), f"Expected a persistence-failure note, got: {context.notes}"
 
     async def test_successful_persist_still_sets_ref(
         self, monkeypatch: pytest.MonkeyPatch, tmp_path: Path
@@ -111,6 +110,6 @@ class TestPersistSaveFaultTolerance:
         analyzer = RepairContextAnalyzer(workspace=workspace)
         context = await analyzer.analyze(project, red)
         assert context.ref is not None, "context.ref must be set after a successful persist()"
-        assert red.repair_context_ref == context.ref, (
-            "test_run.repair_context_ref must match context.ref"
-        )
+        assert (
+            red.repair_context_ref == context.ref
+        ), "test_run.repair_context_ref must match context.ref"

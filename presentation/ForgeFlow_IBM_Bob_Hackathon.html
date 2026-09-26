@@ -434,7 +434,7 @@
 
 <!-- 8 · Where IBM Bob fits -->
 <section class="slide blue" aria-label="Where IBM Bob fits">
-  <p class="stamp">IBM Bob 2.0 Hackathon build</p>
+  <p class="stamp">Built with IBM Bob · 27.86 Bobcoins</p>
   <div><p class="eyebrow">Where IBM Bob fits</p><h2>ForgeFlow automates the bounded part. IBM Bob takes over where it stops.</h2></div>
   <div class="bob-cols">
     <div>
@@ -442,7 +442,7 @@
       <p>ForgeFlow is a real, multi-service codebase of about 800 files: a FastAPI control plane, a React PWA, Docker sandboxes and deploy adapters. During the hackathon we worked on it in IBM Bob IDE, using Bob 2.0's full-repository context to onboard, review and extend it. The repo ships <code>AGENTS.md</code> and <code>.bob/rules/</code> so Bob loads our conventions in every session.</p>
     </div>
     <div>
-      <h3>Continue in IBM Bob <span style="font-family:var(--mono);font-size:12px;font-weight:400;border:1px solid var(--blue-10);padding:2px 6px;margin-left:6px;vertical-align:middle">in progress</span></h3>
+      <h3>Continue in IBM Bob <span style="font-family:var(--mono);font-size:12px;font-weight:400;border:1px solid var(--blue-10);padding:2px 6px;margin-left:6px;vertical-align:middle">built with Bob</span></h3>
       <p>When the repair loop escalates, ForgeFlow exports the workspace ready for Bob:</p>
       <ul class="handoff">
         <li><code>AGENTS.md</code><span>stack, commands and conventions</span></li>
@@ -456,19 +456,19 @@
 
 <!-- 9 · IBM Bob sessions -->
 <section class="slide" aria-label="IBM Bob sessions">
-  <div><p class="eyebrow">IBM Bob sessions</p><h2>What we did in IBM Bob IDE this weekend</h2></div>
+  <div><p class="eyebrow">IBM Bob session</p><h2>One agent task in IBM Bob IDE, five steps, 27.86 Bobcoins</h2></div>
   <table class="sessions">
-    <thead><tr><th>#</th><th>Task</th><th>IBM Bob 2.0 feature</th><th>Result in the repo</th><th>Bobcoins</th></tr></thead>
+    <thead><tr><th>#</th><th>Step</th><th>IBM Bob 2.0 feature</th><th>Result in the repo</th></tr></thead>
     <tbody>
-      <tr><td>01</td><td>Onboard Bob to an 800-file, multi-service repo</td><td class="feat">/init, Ask mode, parallel explore subagents</td><td><span class="tok">AGENTS.md</span> and <span class="tok">.bob/</span> mode context</td><td><span class="fill">[ ]</span></td></tr>
-      <tr><td>02</td><td>Review the repair loop, sandbox and deploy code</td><td class="feat">/review and the Bob Findings panel</td><td>Fix commits for confirmed findings</td><td><span class="fill">[ ]</span></td></tr>
-      <tr><td>03</td><td>Plan the IBM Bob handoff from our own specs</td><td class="feat">Plan mode reading AGENTS.md, .bob/rules and our docs</td><td><span class="tok">plans/bob-handoff.md</span></td><td><span class="fill">[ ]</span></td></tr>
-      <tr><td>04</td><td>Build the handoff end to end</td><td class="feat">Agent mode with parallel tool calls</td><td>Export endpoint and the Continue in IBM Bob button</td><td><span class="fill">[ ]</span></td></tr>
-      <tr><td>05</td><td>Test the handoff</td><td class="feat">Agent mode with a general subagent</td><td>pytest and Vitest cases</td><td><span class="fill">[ ]</span></td></tr>
+      <tr><td>01</td><td>Trace how a failing test becomes a repair attempt</td><td class="feat">2 explore subagents in parallel, guided by AGENTS.md and .bob/rules</td><td>Hop-by-hop map with file and function references</td></tr>
+      <tr><td>02</td><td>Review the repair loop, sandbox and deploy code</td><td class="feat">Agent mode review with a verdict per finding</td><td>6 findings, 2 real bugs fixed, 8 regression tests</td></tr>
+      <tr><td>03</td><td>Plan Continue in IBM Bob from the codebase</td><td class="feat">Repository-wide reading and a to-do plan</td><td><span class="tok">plans/bob-handoff.md</span></td></tr>
+      <tr><td>04</td><td>Build the handoff end to end</td><td class="feat">Parallel tool calls, diffs across backend and PWA</td><td><span class="tok">handoff.py</span>, export endpoint, Continue in IBM Bob button</td></tr>
+      <tr><td>05</td><td>Test the handoff</td><td class="feat">Bob runs the suites in the terminal</td><td>37 pytest + 4 Vitest cases; backend suite 1,790 passed</td></tr>
     </tbody>
   </table>
   <div class="spacer"></div>
-  <p class="band">Evidence: every session's consumption-summary screenshot and exported task history, for each team member, in <span class="tok">bob_sessions/</span>.</p>
+  <p class="band">Evidence: exported task history and consumption summary in <span class="tok">bob_sessions/sanidhya/</span>. Task e974963b063af54c60573c71ade2d7e4.</p>
 </section>
 
 <!-- 10 · Who it's for -->
@@ -561,7 +561,7 @@
       <li>Watch the repair loop fix Clear completed</li>
       <li>Deploy the SPA and API to Vercel, data to MongoDB Atlas</li>
       <li>Re-run the suite against the live URL</li>
-      <li class="bob">Next: escalate a hard case and continue it in IBM Bob</li>
+      <li class="bob">Escalate a hard case and continue it in IBM Bob</li>
     </ol>
     <div class="links">
       <div><p class="k">Live app</p><p class="v"><a href="https://forgeflow-ecru.vercel.app" target="_blank" rel="noopener">forgeflow-ecru.vercel.app</a></p></div>
