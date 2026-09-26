@@ -315,12 +315,11 @@ class RepairContextAnalyzer:
             ref = await self._blob_store().put(
                 json.dumps(context.to_dict(), indent=2).encode("utf-8")
             )
+            context.ref = ref
+            test_run.repair_context_ref = ref
+            await test_run.save()
         except Exception:  # auditability is best-effort; never fail the analysis over a blob
             context.notes.append("Could not persist the repair context blob.")
-            return context
-        context.ref = ref
-        test_run.repair_context_ref = ref
-        await test_run.save()
         return context
 
     def _blob_store(self) -> BlobStore:

@@ -9,6 +9,8 @@ The loop itself is phase-31; this is the thin HTTP surface the Test-stage UI nee
   escalation payload).
 - ``GET  /projects/{id}/repair/attempts/{attempt_id}/diff`` — one attempt's patch, for the diff
   view.
+- ``GET  /projects/{id}/repair/export-bob-handoff`` — download a zip for "Continue in IBM Bob":
+  AGENTS.md, .bob/rules/forgeflow-stack.md, and BOB_HANDOFF.md rendered from the escalation data.
 
 Ownership is enforced through the owning project; a record the caller doesn't own is a ``404``, so
 its existence is never leaked.
@@ -17,11 +19,14 @@ its existence is never leaked.
 from __future__ import annotations
 
 import asyncio
+import io
 import json
+import zipfile
 from typing import Any
 
 from beanie import PydanticObjectId
 from fastapi import APIRouter, Depends
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 
 from app.agents.suite_context import SuiteRepairContextAnalyzer
@@ -35,6 +40,7 @@ from app.db.repos import RepairAttemptRepo, TestRunRepo
 from app.orchestrator.artifacts import ArtifactService
 from app.orchestrator.stages.repair import REPAIR_REPORT_KIND, RepairLoopController
 from app.projects.service import ProjectService, parse_object_id
+from app.testing.handoff import render_agents_md, render_bob_handoff_md, render_stack_md
 
 repair_router = APIRouter(prefix="/projects", tags=["repair"])
 
@@ -173,3 +179,77 @@ async def attempt_diff(
         except Exception:  # a missing blob is an empty diff, not an error
             diff = ""
     return AttemptDiffPublic(attempt_id=str(attempt.id), iteration=attempt.iteration, diff=diff)
+
+
+@repair_router.get("/{project_id}/repair/export-bob-handoff")
+async def export_bob_handoff(
+    project_id: str,
+    user_id: PydanticObjectId = Depends(get_current_user_id),
+) -> StreamingResponse:
+    """Download a zip containing AGENTS.md, .bob/rules/forgeflow-stack.md and BOB_HANDOFF.md.
+
+    The zip is built in-memory from the latest persisted repair-report artifact. Returns 404 when
+    the project has no repair run that ended in an escalation.
+    """
+    pid = parse_object_id(project_id)
+    project = await ProjectService().get_owned(pid, user_id)
+
+    # Fetch the latest repair report artifact and parse it.
+    artifacts = ArtifactService()
+    latest = await artifacts.get_latest_of_kind(
+        pid, Stage.test, ArtifactType.repair_attempt, REPAIR_REPORT_KIND
+    )
+    if latest is None:
+        raise NotFoundError("No repair report found for this project")
+    content = await artifacts.get_content(latest)
+    if not content:
+        raise NotFoundError("Repair report is empty")
+    try:
+        report = json.loads(content)
+    except (ValueError, TypeError) as exc:
+        raise NotFoundError("Repair report is unreadable") from exc
+
+    escalation: dict[str, Any] | None = report.get("escalation")
+    if not escalation:
+        raise NotFoundError("The repair loop has not escalated for this project")
+
+    # Load criteria text from the RepairContext blob of the most recent failing sandbox run.
+    criteria: list[dict[str, Any]] = []
+    try:
+        runs = TestRunRepo()
+        latest_run = await runs.latest(pid, env=TestEnv.sandbox)
+        if latest_run and latest_run.repair_context_ref:
+            raw = await get_blob_store().get(latest_run.repair_context_ref)
+            ctx_dict = json.loads(raw.decode("utf-8"))
+            snippets = ctx_dict.get("requirement_snippets") or []
+            criteria = [
+                {
+                    "criterion_id": s.get("criterion_id", ""),
+                    "text": s.get("text", ""),
+                    "feature": s.get("feature", ""),
+                }
+                for s in snippets
+                if s.get("criterion_id")
+            ]
+    except Exception:  # criteria are informational; never fail the download over them
+        criteria = []
+
+    # Render the three files.
+    agents_md = render_agents_md(project.name)
+    stack_md = render_stack_md()
+    handoff_md = render_bob_handoff_md(project.name, escalation, criteria=criteria)
+
+    # Build the zip in-memory.
+    buf = io.BytesIO()
+    with zipfile.ZipFile(buf, mode="w", compression=zipfile.ZIP_DEFLATED) as zf:
+        zf.writestr("AGENTS.md", agents_md)
+        zf.writestr(".bob/rules/forgeflow-stack.md", stack_md)
+        zf.writestr("BOB_HANDOFF.md", handoff_md)
+    buf.seek(0)
+
+    slug = project_id[-8:]
+    return StreamingResponse(
+        buf,
+        media_type="application/zip",
+        headers={"Content-Disposition": f'attachment; filename="bob-handoff-{slug}.zip"'},
+    )

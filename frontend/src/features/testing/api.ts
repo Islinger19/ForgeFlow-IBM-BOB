@@ -1,4 +1,5 @@
-import { apiFetch } from '../../lib/apiClient';
+import { ApiError, apiBaseUrl, apiFetch } from '../../lib/apiClient';
+import { useAuthStore } from '../../lib/stores/authStore';
 import type {
   RepairLoopDto,
   TestRunDto,
@@ -67,4 +68,30 @@ export function getAttemptDiff(projectId: string, attemptId: string): Promise<{ 
   return apiFetch<{ attempt_id: string; iteration: number; diff: string }>(
     `/projects/${projectId}/repair/attempts/${attemptId}/diff`,
   );
+}
+
+/**
+ * Trigger a download of the "Continue in IBM Bob" handoff zip.
+ *
+ * Uses a direct fetch (not apiFetch) because the response is binary. Creates a temporary <a>
+ * element and programmatically clicks it so the browser saves the file.
+ */
+export async function exportBobHandoff(projectId: string): Promise<void> {
+  const { token } = useAuthStore.getState();
+  const res = await fetch(
+    `${apiBaseUrl}/projects/${projectId}/repair/export-bob-handoff`,
+    { headers: token ? { Authorization: `Bearer ${token}` } : {} },
+  );
+  if (!res.ok) {
+    throw new ApiError(res.status, 'Export failed');
+  }
+  const blob = await res.blob();
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `bob-handoff-${projectId.slice(-8)}.zip`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }

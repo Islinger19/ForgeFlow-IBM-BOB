@@ -523,7 +523,10 @@ class DockerRuntime:
     def _exec(self, argv: list[str], workdir: str | None = None) -> ExecResult:
         exit_code, output = self._container.exec_run(argv, workdir=workdir, demux=True)
         stdout, stderr = output if output is not None else (None, None)
-        return ExecResult(int(exit_code or 0), stdout or b"", stderr or b"")
+        # A null ExitCode means the container died mid-exec; map it to EXIT_UNKNOWN (-1), never 0.
+        # Callers that check `result.ok` (exit_code == 0) must not read a dead container as success.
+        code = EXIT_UNKNOWN if exit_code is None else int(exit_code)
+        return ExecResult(code, stdout or b"", stderr or b"")
 
     def read_bytes(self, rel: str) -> bytes:
         abs_path = self._abs(rel)

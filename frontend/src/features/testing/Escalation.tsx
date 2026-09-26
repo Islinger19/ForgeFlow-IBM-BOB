@@ -6,6 +6,7 @@ import { ApiError } from '../../lib/apiClient';
 import { toast } from '../../lib/stores/toastStore';
 import { useWorkspaceStore } from '../../lib/stores/workspaceStore';
 import type { RepairEscalation } from '../../lib/types';
+import { exportBobHandoff } from './api';
 import { submitIntent } from '../workspace/api';
 
 const REASON_LABELS: Record<string, string> = {
@@ -36,6 +37,13 @@ export function Escalation({
   const queryClient = useQueryClient();
   const setActiveStage = useWorkspaceStore((s) => s.setActiveStage);
   const [guidance, setGuidance] = useState('');
+
+  const exportHandoff = useMutation({
+    mutationFn: () => exportBobHandoff(projectId),
+    onError: () => {
+      toast({ title: 'Export failed', description: 'Could not prepare the handoff zip', variant: 'error' });
+    },
+  });
 
   const resume = useMutation({
     mutationFn: () =>
@@ -108,6 +116,19 @@ export function Escalation({
           </ul>
         </div>
       ) : null}
+
+      <div className="flex items-center">
+        <Button
+          type="button"
+          variant="outline"
+          size="sm"
+          data-testid="export-bob-handoff"
+          disabled={exportHandoff.isPending}
+          onClick={() => exportHandoff.mutate()}
+        >
+          {exportHandoff.isPending ? 'Preparing…' : 'Continue in IBM Bob ↗'}
+        </Button>
+      </div>
 
       <form
         className="space-y-2"
