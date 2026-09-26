@@ -6,7 +6,7 @@ Deadline: **27 Sep 2026, 11:00 AM ET (8:30 PM IST)** on lablab.ai.
 
 | File | Use |
 |------|-----|
-| `ForgeFlow_IBM_Bob_Hackathon.html` | 13-slide deck. Arrows appear only when you hover the left/right edge; ← → keys also work; F = full screen. |
+| `ForgeFlow_IBM_Bob_Hackathon.html` | 14-slide deck. Arrows appear only when you hover the left/right edge; ← → keys also work; F = full screen. |
 | `ForgeFlow_IBM_Bob_Hackathon.pdf` | The same deck for the "Slide Presentation" upload. |
 | `IBM_Bob_Hackathon_Submission.md` | Paste-ready text for every form field (title, short/long description, Bob statement, categories, technologies, links). |
 

@@ -41,7 +41,7 @@ WHAT MAKES IT DIFFERENT
 Most builders treat generation as the finish line. ForgeFlow treats verification as the product: a repair loop designed to terminate, escalation as a normal outcome instead of an error, and tests re-run on the deployed URL. Pairing it with IBM Bob gives every hard case a real next step, with the developer in charge.
 
 EFFICIENCY
-Untrusted code runs only in per-project Docker sandboxes with no host network. Models are routed by role, so the expensive model runs only for code, tests and repair, and cost is tracked per project against a budget cap. ForgeFlow ships with 2,000+ automated tests built across 65 incremental parts, six quality gates before every commit, and a 10-app benchmark tracking first-pass versus post-repair pass rate, iterations and cost.
+Untrusted code runs only in per-project Docker sandboxes with no host network. Models are routed by role, so the expensive model runs only for code, tests and repair, and cost is tracked per project against a budget cap. ForgeFlow ships with 2,000+ automated tests, six quality gates before every commit, and a 10-app benchmark tracking first-pass versus post-repair pass rate, iterations and cost.
 <!-- LONG-END -->
 
 ## IBM Bob Usage Statement
